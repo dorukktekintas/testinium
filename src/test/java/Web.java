@@ -18,6 +18,18 @@ public class Web  extends PageObject{
     @FindBy(xpath = "//div[@class='gekhq4-5 grTfZj']")
     private WebElement login_field;
 
+    @FindBy(xpath = "//header/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/a[1][@class='sc-84am1q-0 sc-1r48nyr-0 gpYIaK']")
+    private WebElement cart;
+
+    @FindBy(xpath = "//*/div[1]/div[4]/div/div[2]/select/option[2]")
+    private WebElement addQuantity;
+
+    @FindBy(xpath = "//*/div[1]/div[3]/div/div[2]/div/a[1]")
+    private WebElement deleteCart;
+
+
+
+
 
 
 
@@ -55,6 +67,10 @@ public class Web  extends PageObject{
         this.login_field.click();
     }
 
+    public void pressCardButton(){
+        this.cart.click();
+    }
+
 
 
     public void enterEmail(){
@@ -89,10 +105,37 @@ public class Web  extends PageObject{
 
     public void chooseRandom(){
         List<WebElement> randomProduct = driver.findElements(By.xpath("//ul/li[@product-index>0]"));
-        int maxProducts = randomProduct.size();
-        Random random = new Random(47);
-        int randomProducts = random.nextInt(maxProducts);
+        int maxProduct = randomProduct.size();
+        Random random = new Random();
+        int randomProducts = random.nextInt(maxProduct);
         randomProduct.get(randomProducts).click();
+    }
+
+    public void priceCheck(){
+        String lowPrice = driver.findElement(By.id("sp-price-lowPrice")).getText();
+        String highPrice = driver.findElement(By.id("sp-price-highPrice")).getText();
+        String priceInCart = driver.findElement(By.className("product-new-price")).getText();
+
+
+        if(lowPrice.equals(priceInCart)){
+            System.out.println("Price in Page and Price in Cart have same amount");
+        }else if(highPrice.equals(priceInCart)){
+            System.out.println("Price in Page and Price in Cart have same amount");
+        }
+
+
+
+
+    }
+    public void addSecondProduct(){
+        this.addQuantity.click();
+        System.out.println("Second Product added");
+    }
+
+    public void pressDeleteCart(){
+        this.deleteCart.click();
+        System.out.println("All Products removed");
+
     }
 
 

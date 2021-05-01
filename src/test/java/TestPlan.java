@@ -84,18 +84,27 @@ public class TestPlan {
 
         }
         web.chooseRandom();
-        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        javascriptExecutor.executeScript("scrollBy(0,150)");
+
         web.addProductToBasket();
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+
+        web.priceCheck();
+       // web.pressCardButton();
+        driver.get(Utils.CART);
+        web.addSecondProduct();
+
+        web.pressDeleteCart();
 
 
 
 
     }
-  /*  @After
-   public void cleanUp(){
-       driver.manage().deleteAllCookies();
-       driver.close();
-    }*/
+    //@After
+   //public void cleanUp(){
+     //  driver.manage().deleteAllCookies();
+      // driver.close();
+    //}
 
 
 }
