@@ -2,6 +2,7 @@ import org.junit.After;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 
@@ -24,7 +25,11 @@ public class TestPlan {
     public void startTest(){
         //check if the right page opened
 
+
+
+
         driver.get(Utils.BASE_URL);
+        driver.manage().window().maximize();
         try{
             String expectedUrl = "https://www.gittigidiyor.com/";
             Assert.assertEquals(expectedUrl, driver.getCurrentUrl());
@@ -65,12 +70,32 @@ public class TestPlan {
         driver.get(Utils.SEARCH_SIMULATOR);
 
 
+        JavascriptExecutor javascriptExecutor = (JavascriptExecutor) driver;
+        javascriptExecutor.executeScript("scrollBy(0,30000)");
+
+        web.changePage();
+        //check if second page opened
+        try{
+            String expectedUrl = "https://www.gittigidiyor.com/arama/?k=Bilgisayar&sf=2";
+            Assert.assertEquals(expectedUrl, driver.getCurrentUrl());
+            System.out.println("Second Page Opened Successfully");
+        }catch (Throwable pageNavigationError){
+            System.out.println("Second Page Did Not Opened Successfully");
+
+        }
+        web.chooseRandom();
+        driver.manage().timeouts().implicitlyWait(15, TimeUnit.SECONDS);
+        web.addProductToBasket();
+
+
+
+
     }
-    @After
+  /*  @After
    public void cleanUp(){
        driver.manage().deleteAllCookies();
        driver.close();
-    }
+    }*/
 
 
 }
