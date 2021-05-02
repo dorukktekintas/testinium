@@ -18,7 +18,10 @@ public class Web  extends PageObject{
     @FindBy(xpath = "//div[@class='gekhq4-5 grTfZj']")
     private WebElement login_field;
 
-    @FindBy(xpath = "//header/div[3]/div[1]/div[1]/div[1]/div[3]/div[1]/div[2]/a[1][@class='sc-84am1q-0 sc-1r48nyr-0 gpYIaK']")
+    @FindBy(xpath = "//*/div[3]/div/div/div/div[3]/div/div[1]/div/div[2][@class = 'gekhq4-4 egoSnI'")
+    private WebElement login_field2;
+
+    @FindBy(xpath = "//*/div[4]/div[3]/div/a[@class='header-cart-hidden-link']")
     private WebElement cart;
 
     @FindBy(xpath = "//*/div[1]/div[4]/div/div[2]/select/option[2]")
@@ -26,12 +29,6 @@ public class Web  extends PageObject{
 
     @FindBy(xpath = "//*/div[1]/div[3]/div/div[2]/div/a[1]")
     private WebElement deleteCart;
-
-
-
-
-
-
 
     @FindBy(id = "L-UserNameField")
     private WebElement email_field;
@@ -45,11 +42,7 @@ public class Web  extends PageObject{
     @FindBy(id="add-to-basket")
     private WebElement add_to_basket;
 
-    @FindBy(css = "header.sc-1ycxyu1-0.hTdDsg div.u0iwlj-0.jdHemr div.sc-1yvp483-0.jUYNgf div.sc-1nx8ums-0.fXQfgp:nth-child(2) form:nth-child(1) div.sc-1yew439-0.gKMWDJ div.sc-1yew439-3.bxSoKG div.sc-4995aq-4.dNPmGY:nth-child(2) > input.sc-4995aq-0.sc-14oyvky-0.itMXHg")
-    private WebElement search_field_css;
-
-
-    @FindBy(xpath = "/html/body/div[2]/header/div[3]/div/div/div/div[2]/form/div/div[1]/div[2]/input[@class='sc-4995aq-0 sc-14oyvky-0 itMXHg']")
+    @FindBy(xpath = "//*/div[3]/div/div/div/div[2]/form/div/div[1]/div[2]/input[@class='sc-4995aq-0 sc-14oyvky-0 itMXHg']")
     private WebElement search_field;
 
     @FindBy(xpath = "//*[@class='qjixn8-0 sc-1bydi5r-0 hKfdXF']")
@@ -67,11 +60,13 @@ public class Web  extends PageObject{
         this.login_field.click();
     }
 
+    public void pressLoginButton2(){
+        this.login_field2.click();
+    }
+
     public void pressCardButton(){
         this.cart.click();
     }
-
-
 
     public void enterEmail(){
         this.email_field.sendKeys(EMAIL);
@@ -90,8 +85,6 @@ public class Web  extends PageObject{
     }
 
     public void enterSearch(){
-       WebDriverWait wait = new WebDriverWait(driver,10);
-       search_field = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("/html/body/div[2]/header/div[3]/div/div/div/div[2]/form/div/div[1]/div[2]/input[@class='sc-4995aq-0 sc-14oyvky-0 itMXHg']")));
        this.search_field.sendKeys(SEARCH);
     }
 
@@ -122,11 +115,8 @@ public class Web  extends PageObject{
         }else if(highPrice.equals(priceInCart)){
             System.out.println("Price in Page and Price in Cart have same amount");
         }
-
-
-
-
     }
+
     public void addSecondProduct(){
         this.addQuantity.click();
         System.out.println("Second Product added");
